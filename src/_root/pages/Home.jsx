@@ -39,6 +39,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { DataTablePagination } from "@/components/shared/table/table-pagination"
 
 const columns2 = [
   {
@@ -131,6 +132,10 @@ const columns2 = [
   },
 ]
 
+const sliceTitle = (title) => {
+  return title.length > 50 ? title.slice(0, 60) + '...' : title
+}
+
 const columns = [
   {
     accessorKey: "status",
@@ -140,6 +145,9 @@ const columns = [
   {
     accessorKey: "title",
     header: "Title",
+    cell: ({ row }) => (
+      <Link className="hover:text-blue-400 transition" title={row?.title} to={`/editor/${row.id}`}>{sliceTitle(row.getValue("title"))}</Link>
+    ),
   },
   {
     accessorKey: "solution",
@@ -152,6 +160,16 @@ const columns = [
   {
     accessorKey: "difficulty",
     header: "Difficulty",
+    cell: ({ row }) => {
+      const difficulty = row.getValue("difficulty");
+      const color =
+        difficulty === "easy" ? "text-green-400" :
+          difficulty === "medium" ? "text-yellow-400" :
+            difficulty === "hard" ? "text-red-400" :
+              "text-red-400";
+
+      return <span className={'text-red-500'}>{difficulty}</span>
+    },
   },
   {
     accessorKey: "frequency",
@@ -167,14 +185,12 @@ const Home = () => {
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const [search, setSearch] = React.useState('')
-
 
   const dataTable = React.useMemo(() => [
     {
       id: "m5gr84i9",
       status: "✔️",
-      title: "2115. Find All Possible Recipes...",
+      title: "1. Two Sum",
       solution: "📄",
       acceptance: "55.7%",
       difficulty: "Medium",
@@ -184,7 +200,7 @@ const Home = () => {
     {
       id: "3u1reuv4",
       status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
+      title: "3173. Bitwise OR of Adjacent 3173",
       solution: "Premium",
       acceptance: "95.2%",
       difficulty: "Easy",
@@ -192,6 +208,88 @@ const Home = () => {
       newColumn: "More Data", // New data field
     },
     {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    },
+    {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
+      id: "3u1reuv4",
+      status: "🔒",
+      title: "3173. Bitwise OR of Adjacent...",
+      solution: "Premium",
+      acceptance: "95.2%",
+      difficulty: "Hard",
+      frequency: "🔒",
+      newColumn: "More Data", // New data field
+    }, {
       id: "3u1reuv4",
       status: "🔒",
       title: "3173. Bitwise OR of Adjacent...",
@@ -291,23 +389,22 @@ const Home = () => {
             className="w-full max-w-full"
           >
             <CarouselContent>
-              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
               </CarouselItem>
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
-
           <div className="flex items-center justify-between mt-8">
             <p className="text-lg">Study Plan</p>
             <Link className="text-blue-400 text-sm" to='/'>See all</Link>
@@ -323,7 +420,6 @@ const Home = () => {
               </Link>
             ))}
           </div>
-
           <div className="flex justify-between items-end mt-6 rounded-lg text-xs">
             <div className="flex flex-wrap gap-5">
               {tags.slice(0, expanded ? tags.length : 8).map((tag) => (
@@ -345,9 +441,7 @@ const Home = () => {
               {expanded ? "Collapse" : "Expand"}
             </button>
           </div>
-
           <div className="w-full mt-6">
-
             <div className="flex items-center justify-between">
               <Select>
                 <SelectTrigger className="w-[120px]">
@@ -458,40 +552,16 @@ const Home = () => {
                   )}
                 </TableBody>
               </Table>
-            </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-              <div className="flex-1 text-sm text-muted-foreground">
-                {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                {table.getFilteredRowModel().rows.length} row(s) selected.
-              </div>
-              <div className="space-x-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => table.previousPage()}
-                  disabled={!table.getCanPreviousPage()}
-                >
-                  Previous
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => table.nextPage()}
-                  disabled={!table.getCanNextPage()}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          </div>
 
+            </div>
+            <DataTablePagination table={table} />
+          </div>
         </div>
         <div className="col-span-1 flex flex-col items-center">
           <Calendar
             mode="single"
             selected={date}
             onSelect={setDate}
-
             className="rounded-md border"
           />
         </div>

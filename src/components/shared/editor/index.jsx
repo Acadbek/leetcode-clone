@@ -73,6 +73,10 @@ export default function LeetCodeEditor() {
   const [code, setCode] = useState("// Write your code here...");
   const [output, setOutput] = useState("");
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const onChange = useCallback((value) => {
     setCode(value);
   }, []);

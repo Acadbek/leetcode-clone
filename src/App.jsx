@@ -22,9 +22,12 @@ function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/editor" element={<LeetCodeEditor />} />
+          <Route path="/editor/:id" element={<LeetCodeEditor />} />
         </Route>
+
+        <Route path="*" element={<h1>404</h1>} />
       </Routes>
+
     </ThemeProvider>
   )
 }
