@@ -17,6 +17,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import DOMPurify from 'dompurify';
 import {
   ResizableHandle,
   ResizablePanel,
@@ -43,6 +44,8 @@ const themes = {
 const executeCode = async (language, code) => {
   if (language === "javascript") {
     try {
+      code = DOMPurify.sanitize(code);
+      
       const result = eval(code);
       return result?.toString() || "No output";
     } catch (error) {

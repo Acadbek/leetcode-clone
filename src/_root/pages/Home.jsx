@@ -163,12 +163,12 @@ const columns = [
     cell: ({ row }) => {
       const difficulty = row.getValue("difficulty");
       const color =
-        difficulty === "easy" ? "text-green-400" :
-          difficulty === "medium" ? "text-yellow-400" :
-            difficulty === "hard" ? "text-red-400" :
-              "text-red-400";
+        difficulty === "Easy" ? "text-green-400" :
+          difficulty === "Medium" ? "text-yellow-400" :
+            difficulty === "Hard" ? "text-red-400" :
+              "text-gray-100";
 
-      return <span className={'text-red-500'}>{difficulty}</span>
+      return <span className={color}>{difficulty}</span>
     },
   },
   {
@@ -379,8 +379,8 @@ const Home = () => {
   ];
 
   return (
-    <div className="container mx-auto">
-      <div className="grid md:grid-cols-4 grid-cols-1 pt-12">
+    <div className="container mx-auto mt-5">
+      <div className="grid md:grid-cols-4 grid-cols-1 pt-12 gap-4">
         <div className="col-span-3">
           <Carousel
             opts={{
@@ -442,7 +442,7 @@ const Home = () => {
             </button>
           </div>
           <div className="w-full mt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2">
               <Select>
                 <SelectTrigger className="w-[120px]">
                   <SelectValue placeholder="Lists" />
@@ -557,12 +557,12 @@ const Home = () => {
             <DataTablePagination table={table} />
           </div>
         </div>
-        <div className="col-span-1 flex flex-col items-center">
+        <div className="col-span-1">
           <Calendar
             mode="single"
             selected={date}
             onSelect={setDate}
-            className="rounded-md border"
+            className="rounded-md border flex justify-center items-center"
           />
         </div>
       </div>

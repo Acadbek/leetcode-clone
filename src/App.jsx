@@ -9,19 +9,21 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './_root/pages/Home'
 import RootLayout from './_root/RootLayout'
 import LeetCodeEditor from './components/shared/editor'
+import Profile from './_root/pages/Profile'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <marquee direction='right' className='font-monospace'>
+      {/* <marquee direction='right' className='font-monospace'>
         🚧 This website is under development. Some features may not work as expected. 🚧
-      </marquee>
+      </marquee> */}
 
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/editor/:id" element={<LeetCodeEditor />} />
         </Route>
 
