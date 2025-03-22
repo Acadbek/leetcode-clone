@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const Profile = () => {
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-12 mt-6">
+      <div className="grid grid-cols-12 mt-6 gap-4">
         <div className="col-span-3 p-3 border">
           <div className="flex items-center gap-3">
             <img width={80} height={80} className="rounded-lg object-cover" src="https://assets.leetcode.com/users/avatars/avatar_1646426627.png" alt="" />
@@ -47,7 +47,11 @@ const Profile = () => {
             <Badge variant="secondary">Lua</Badge>
           </div>
         </div>
-        <div className="col-span-9">1</div>
+        <div className="col-span-9">
+          <ActivityStats
+
+          />
+        </div>
       </div>
     </div>
   )
