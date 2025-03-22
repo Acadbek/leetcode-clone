@@ -43,6 +43,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const languages = {
   javascript: { name: "JavaScript", mode: javascript(), compiler: "js" },
@@ -231,23 +232,26 @@ export default function LeetCodeEditor() {
           </Button>
         </div>
         <div className="flex items-center gap-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-          >
-            <g
-              fill="none"
-              stroke="#808080"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
+          <ModeToggle />
+          <Link to='/settings'>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
             >
-              <path d="M19.875 6.27A2.23 2.23 0 0 1 21 8.218v7.284c0 .809-.443 1.555-1.158 1.948l-6.75 4.27a2.27 2.27 0 0 1-2.184 0l-6.75-4.27A2.23 2.23 0 0 1 3 15.502V8.217c0-.809.443-1.554 1.158-1.947l6.75-3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98z" />
-              <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0-6 0" />
-            </g>
-          </svg>
+              <g
+                fill="none"
+                stroke="#808080"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              >
+                <path d="M19.875 6.27A2.23 2.23 0 0 1 21 8.218v7.284c0 .809-.443 1.555-1.158 1.948l-6.75 4.27a2.27 2.27 0 0 1-2.184 0l-6.75-4.27A2.23 2.23 0 0 1 3 15.502V8.217c0-.809.443-1.554 1.158-1.947l6.75-3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98z" />
+                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0-6 0" />
+              </g>
+            </svg>
+          </Link>
           <div className="flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
