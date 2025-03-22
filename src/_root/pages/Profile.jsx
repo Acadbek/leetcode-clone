@@ -64,7 +64,9 @@ const Profile = () => {
                 <p className="mt-3 text-muted-foreground">Rank: <span className="text-primary">1</span></p>
               </div>
             </div>
-            <Button className="mt-6 w-full h-8 bg-[#2B392F] hover:bg-[#2B392F] text-green-500">Edit Profile</Button>
+            <Link to='/edit-profile'>
+              <Button className="mt-6 w-full h-8 bg-[#2B392F] hover:bg-[#2B392F] text-green-500">Edit Profile</Button>
+            </Link>
 
             <h3 className="text-sm font-semibold mt-5">Community Stats</h3>
             <div className="mt-3 flex flex-col gap-2">
