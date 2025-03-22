@@ -38,6 +38,14 @@ import {
 } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { DataTablePagination } from "@/components/shared/table/table-pagination"
+import {
+  Label,
+  PolarGrid,
+  PolarRadiusAxis,
+  RadialBar,
+  RadialBarChart,
+} from "recharts"
+import { ChartContainer } from "@/components/ui/chart"
 
 const columns2 = [
   {
@@ -129,6 +137,20 @@ const columns2 = [
     },
   },
 ]
+
+const chartData = [
+  { browser: "safari", visitors: 100, fill: "var(--color-safari)" },
+]
+
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  safari: {
+    label: "Safari",
+    color: "hsl(var(--chart-2))",
+  },
+}
 
 const sliceTitle = (title) => {
   return title.length > 50 ? title.slice(0, 60) + '...' : title
@@ -562,6 +584,74 @@ const Home = () => {
             onSelect={setDate}
             className="rounded-md border flex justify-center items-center"
           />
+          <div className="w-full flex rounded-lg border justify-between mt-4 pr-2">
+            <ChartContainer
+              config={chartConfig}
+              className="w-[70%] aspect-square max-h-[180px]"
+            >
+              <RadialBarChart
+                data={chartData}
+                startAngle={0}
+                endAngle={220}
+                innerRadius={60}
+                outerRadius={75}
+              >
+                <PolarGrid
+                  gridType="circle"
+                  radialLines={false}
+                  stroke="none"
+                  className="first:fill-muted last:fill-background"
+                  polarRadius={[64, 60]}
+                />
+                <RadialBar dataKey="visitors" background cornerRadius={10} />
+                <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                  <Label
+                    content={({ viewBox }) => {
+                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                        return (
+                          <text
+                            x={viewBox.cx}
+                            y={viewBox.cy}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                          >
+                            <tspan
+                              x={viewBox.cx}
+                              y={viewBox.cy}
+                              className="fill-foreground text-4xl font-bold"
+                            >
+                              {chartData[0].visitors.toLocaleString()}
+                            </tspan>
+                            <tspan
+                              x={viewBox.cx}
+                              y={(viewBox.cy || 0) + 24}
+                              className="fill-muted-foreground"
+                            >
+                              Visitors
+                            </tspan>
+                          </text>
+                        )
+                      }
+                    }}
+                  />
+                </PolarRadiusAxis>
+              </RadialBarChart>
+            </ChartContainer>
+            <div className="w-[30%] flex flex-col items-center gap-2 py-2">
+              <div className="dark:bg-zinc-900 bg-zinc-100 rounded-lg w-full flex flex-col items-center justify-center h-[33.3%]">
+                <p className="text-sm text-green-600">Easy</p>
+                <p className="text-gray-400 text-xs font-semibold mt-1">31/444</p>
+              </div>
+              <div className="dark:bg-zinc-900 bg-zinc-100 rounded-lg w-full flex flex-col items-center justify-center h-[33.3%]">
+                <p className="text-sm text-yellow-600">Middle</p>
+                <p className="text-gray-400 text-xs font-semibold mt-1">31/444</p>
+              </div>
+              <div className="dark:bg-zinc-900 bg-zinc-100 rounded-lg w-full flex flex-col items-center justify-center h-[33.3%]">
+                <p className="text-sm text-red-600">Hard</p>
+                <p className="text-gray-400 text-xs font-semibold mt-1">31/444</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
