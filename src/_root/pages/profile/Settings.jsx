@@ -8,6 +8,11 @@ import {
   Bell,
   CreditCard,
   ExternalLink,
+  Camera,
+  RotateCcwIcon,
+  RotateCcw,
+  LucideRotateCcw,
+  RotateCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -15,9 +20,22 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Slider } from "@/components/ui/slider";
 
 export default function ProfileSettings() {
   const [activeTab, setActiveTab] = useState("basic-info");
+  const [open, setOpen] = useState(false);
+  const [scale, setScale] = useState(1); // Zoom darajasi
+  const [rotation, setRotation] = useState(0); // Rotation angle
 
   const profileData = {
     name: "Asadbek Nosirjonov",
@@ -34,14 +52,105 @@ export default function ProfileSettings() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-gray-800 to-gray-900">
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-[525px]">
+          <div className="flex items-center justify-center rounded-lg">
+            <div className="w-[200px] h-[200px] overflow-hidden rounded-lg border-2">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MMV8r0RvdI34Qs0089PJxWLm0Pxu27.png"
+                alt="Profile picture"
+                className="object-cover w-[200px] h-[200px] z-10 rounded-lg"
+                style={{
+                  transform: `scale(${scale}) rotate(${rotation}deg)`,
+                }}
+              />
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <Button onClick={() => setRotation((prev) => prev - 90)}>
+              <RotateCcw />
+            </Button>
+            <Button onClick={() => setRotation((prev) => prev + 90)}>
+              <RotateCw />
+            </Button>
+            <Button
+              onClick={() => {
+                setScale(1);
+                setRotation(0);
+              }}
+            >
+              Reset
+            </Button>
+          </div>
+          <Slider
+            onValueChange={(value) => setScale(value[0])}
+            defaultValue={[scale]}
+            max={2}
+            min={0.2}
+            step={0.1}
+            className="my-2"
+          />
+          <label
+            for="uploadFile1"
+            class="flex text-black dark:text-white text-sm border font-medium px-2 py-1.5 outline-none rounded w-max cursor-pointer mx-auto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 mr-2 dark:fill-white inline"
+              viewBox="0 0 32 32"
+            >
+              <path
+                d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                data-original="#000"
+              />
+              <path
+                d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                data-original="#000000"
+              />
+            </svg>
+            Choose image
+            <input type="file" id="uploadFile1" class="hidden" />
+          </label>
+          <DialogFooter className="mt-5">
+            <Button
+              onClick={() => {
+                setOpen(false);
+                setScale(1);
+                setRotation(0);
+              }}
+              variant="outline"
+              className="h-8 text-red-500"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outline"
+              className="h-8 text-blue-500"
+              type="submit"
+            >
+              Save changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div className="flex flex-col items-center justify-center p-8 text-white">
-        <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-lg border-4 border-white">
+        <div
+          onClick={() => setOpen(true)}
+          className="cursor-pointer relative mb-4 h-32 w-32 overflow-hidden rounded-lg border-4 border-white group"
+        >
+          {/* Overlay on hover */}
+          <div className="absolute flex justify-center items-center inset-0 bg-gray-800 opacity-0 group-hover:opacity-50 transition-opacity duration-300">
+            <Camera />
+          </div>
+
+          {/* Profile Image */}
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MMV8r0RvdI34Qs0089PJxWLm0Pxu27.png"
             alt="Profile picture"
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full z-10"
           />
         </div>
+
         <h1 className="text-2xl font-bold">
           {profileData.name} <ExternalLink className="ml-1 inline h-5 w-5" />
         </h1>
