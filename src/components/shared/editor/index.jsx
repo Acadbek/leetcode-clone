@@ -17,14 +17,9 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import DOMPurify from 'dompurify';
-import {
-  CreditCard,
-  LifeBuoy,
-  LogOut,
-  Settings,
-} from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import DOMPurify from "dompurify";
+import { CreditCard, LifeBuoy, LogOut, Settings } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,7 +29,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -114,9 +109,8 @@ export default function LeetCodeEditor() {
   };
 
   return (
-    <div className="min-h-screen px-3 pb-3">
-
-      <div className="max-w-[99%] px-1 py-2 mx-auto flex items-center justify-between">
+    <div className="min-h-screen px-8 pb-3">
+      <div className="py-2 mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <Link className="border-r border-white/20 pr-2" to="/">
             LOGO
@@ -186,7 +180,7 @@ export default function LeetCodeEditor() {
         </div>
         <div className="flex items-center gap-[1px] rounded-sm">
           <Button
-            className='h-8 rounded-r-none'
+            className="h-8 rounded-r-none"
             variant="secondary"
             onClick={handleRun}
           >
@@ -206,7 +200,7 @@ export default function LeetCodeEditor() {
           <Button
             variant="secondary"
             onClick={handleSubmit}
-            className='h-8 rounded-l-none'
+            className="h-8 rounded-l-none"
           >
             <svg
               className="mr-1"
@@ -233,7 +227,7 @@ export default function LeetCodeEditor() {
         </div>
         <div className="flex items-center gap-4">
           <ModeToggle />
-          <Link to='/settings'>
+          <Link to="/settings">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -279,7 +273,7 @@ export default function LeetCodeEditor() {
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  <Link to='/profile' className="flex items-center gap-2">
+                  <Link to="/profile" className="flex items-center gap-2">
                     <User />
                     <span>Profile</span>
                   </Link>
@@ -376,9 +370,7 @@ export default function LeetCodeEditor() {
 
           <div className="p-4">
             <h3 className="text-sm font-bold">Output:</h3>
-            <pre className="text-sm whitespace-pre-wrap">
-              {output}
-            </pre>
+            <pre className="text-sm whitespace-pre-wrap">{output}</pre>
           </div>
         </ResizablePanel>
 

@@ -8,34 +8,46 @@ const Navbar = () => {
 
   return (
     <nav className="border-b mt-3 pb-3">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link to="/"><h1>LOGO</h1></Link>
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between">
+        <Link to="/">
+          <h1>LOGO</h1>
+        </Link>
         <div className="flex items-center gap-2">
           <Link className="text-sm" to="/about">
-            <Button className="h-8" variant={location.pathname === "/about" ? "secondary" : "ghost"}>
+            <Button
+              className="h-8"
+              variant={location.pathname === "/about" ? "secondary" : "ghost"}
+            >
               About
             </Button>
           </Link>
           <Link className="text-sm" to="/profile">
-            <Button className="h-8" variant={location.pathname === "/profile" ? "secondary" : "ghost"}>
+            <Button
+              className="h-8"
+              variant={location.pathname === "/profile" ? "secondary" : "ghost"}
+            >
               Profile
             </Button>
           </Link>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Link to='/login'>
-              <Button className="h-8" variant="secondary">Login</Button>
+            <Link to="/login">
+              <Button className="h-8" variant="secondary">
+                Login
+              </Button>
             </Link>
-            <Link to='/register'>
-              <Button className="h-8" variant="secondary">Register</Button>
+            <Link to="/register">
+              <Button className="h-8" variant="secondary">
+                Register
+              </Button>
             </Link>
           </div>
           <ModeToggle />
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Navbar;

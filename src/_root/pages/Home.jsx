@@ -4,21 +4,21 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Calendar } from "@/components/ui/calendar"
-import React from "react"
-import { Link } from "react-router-dom"
-import studyPLanImage from '@/assets/images/image.png'
+} from "@/components/ui/carousel";
+import { Calendar } from "@/components/ui/calendar";
+import React from "react";
+import { Link } from "react-router-dom";
+import studyPLanImage from "@/assets/images/image.png";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal, Settings, Shuffle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal, Settings, Shuffle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,8 +26,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -35,17 +35,23 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { DataTablePagination } from "@/components/shared/table/table-pagination"
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DataTablePagination } from "@/components/shared/table/table-pagination";
 import {
   Label,
   PolarGrid,
   PolarRadiusAxis,
   RadialBar,
   RadialBarChart,
-} from "recharts"
-import { ChartContainer } from "@/components/ui/chart"
+} from "recharts";
+import { ChartContainer } from "@/components/ui/chart";
 
 const columns2 = [
   {
@@ -88,7 +94,7 @@ const columns2 = [
           Email
           <ArrowUpDown />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
@@ -96,22 +102,22 @@ const columns2 = [
     accessorKey: "amount",
     header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+      const amount = parseFloat(row.getValue("amount"));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(amount)
+      }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const payment = row.original;
 
       return (
         <DropdownMenu>
@@ -133,14 +139,14 @@ const columns2 = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
 const chartData = [
   { browser: "safari", visitors: 100, fill: "var(--color-safari)" },
-]
+];
 
 const chartConfig = {
   visitors: {
@@ -150,23 +156,29 @@ const chartConfig = {
     label: "Safari",
     color: "hsl(var(--chart-2))",
   },
-}
+};
 
 const sliceTitle = (title) => {
-  return title.length > 50 ? title.slice(0, 60) + '...' : title
-}
+  return title.length > 50 ? title.slice(0, 60) + "..." : title;
+};
 
 const columns = [
   {
     accessorKey: "status",
     header: "Status",
-    enableSorting: true
+    enableSorting: true,
   },
   {
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => (
-      <Link className="hover:text-blue-400 transition" title={row?.title} to={`/editor/${row.id}`}>{sliceTitle(row.getValue("title"))}</Link>
+      <Link
+        className="hover:text-blue-400 transition"
+        title={row?.title}
+        to={`/editor/${row.id}`}
+      >
+        {sliceTitle(row.getValue("title"))}
+      </Link>
     ),
   },
   {
@@ -183,144 +195,156 @@ const columns = [
     cell: ({ row }) => {
       const difficulty = row.getValue("difficulty");
       const color =
-        difficulty === "Easy" ? "text-green-400" :
-          difficulty === "Medium" ? "text-yellow-400" :
-            difficulty === "Hard" ? "text-red-400" :
-              "text-gray-100";
+        difficulty === "Easy"
+          ? "text-green-400"
+          : difficulty === "Medium"
+          ? "text-yellow-400"
+          : difficulty === "Hard"
+          ? "text-red-400"
+          : "text-gray-100";
 
-      return <span className={color}>{difficulty}</span>
+      return <span className={color}>{difficulty}</span>;
     },
   },
   {
     accessorKey: "frequency",
     header: "Frequency",
-  }
+  },
 ];
 
-
 const Home = () => {
-  const [date, setDate] = React.useState(new Date())
+  const [date, setDate] = React.useState(new Date());
   const [expanded, setExpanded] = React.useState(false);
-  const [sorting, setSorting] = React.useState([])
-  const [columnFilters, setColumnFilters] = React.useState([])
-  const [columnVisibility, setColumnVisibility] = React.useState({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [sorting, setSorting] = React.useState([]);
+  const [columnFilters, setColumnFilters] = React.useState([]);
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
-  const dataTable = React.useMemo(() => [
-    {
-      id: "m5gr84i9",
-      status: "✔️",
-      title: "1. Two Sum",
-      solution: "📄",
-      acceptance: "55.7%",
-      difficulty: "Medium",
-      frequency: "🔒",
-      newColumn: "Extra Info", // New data field
-    },
-    {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent 3173",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Easy",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    },
-    {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    },
-    {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    }, {
-      id: "3u1reuv4",
-      status: "🔒",
-      title: "3173. Bitwise OR of Adjacent...",
-      solution: "Premium",
-      acceptance: "95.2%",
-      difficulty: "Hard",
-      frequency: "🔒",
-      newColumn: "More Data", // New data field
-    },
-  ], [])
-
+  const dataTable = React.useMemo(
+    () => [
+      {
+        id: "m5gr84i9",
+        status: "✔️",
+        title: "1. Two Sum",
+        solution: "📄",
+        acceptance: "55.7%",
+        difficulty: "Medium",
+        frequency: "🔒",
+        newColumn: "Extra Info", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent 3173",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Easy",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+      {
+        id: "3u1reuv4",
+        status: "🔒",
+        title: "3173. Bitwise OR of Adjacent...",
+        solution: "Premium",
+        acceptance: "95.2%",
+        difficulty: "Hard",
+        frequency: "🔒",
+        newColumn: "More Data", // New data field
+      },
+    ],
+    []
+  );
 
   const table = useReactTable({
     data: dataTable,
@@ -336,54 +360,54 @@ const Home = () => {
       sorting,
       columnFilters,
       columnVisibility,
-      rowSelection
+      rowSelection,
     },
-  })
+  });
 
   const studyPlan = [
     {
       id: 1,
       img: studyPLanImage,
-      title: 'Top Interview 150',
-      description: 'Must-do List for interview prep',
-      path: '#'
+      title: "Top Interview 150",
+      description: "Must-do List for interview prep",
+      path: "#",
     },
     {
       id: 2,
       img: studyPLanImage,
-      title: 'Top Interview 150',
-      description: 'Must-do List for interview prep',
-      path: '#'
+      title: "Top Interview 150",
+      description: "Must-do List for interview prep",
+      path: "#",
     },
     {
       id: 3,
       img: studyPLanImage,
-      title: 'Top Interview 150',
-      description: 'Must-do List for interview prep',
-      path: '#'
+      title: "Top Interview 150",
+      description: "Must-do List for interview prep",
+      path: "#",
     },
     {
       id: 4,
       img: studyPLanImage,
-      title: 'Top Interview 150',
-      description: 'Must-do List for interview prep',
-      path: '#'
+      title: "Top Interview 150",
+      description: "Must-do List for interview prep",
+      path: "#",
     },
     {
       id: 5,
       img: studyPLanImage,
-      title: 'Top Interview 150',
-      description: 'Must-do List for interview prep',
-      path: '#'
+      title: "Top Interview 150",
+      description: "Must-do List for interview prep",
+      path: "#",
     },
     {
       id: 6,
       img: studyPLanImage,
-      title: 'Top Interview 150',
-      description: 'Must-do List for interview prep',
-      path: '#'
+      title: "Top Interview 150",
+      description: "Must-do List for interview prep",
+      path: "#",
     },
-  ]
+  ];
 
   const tags = [
     { name: "Array", count: 1868 },
@@ -399,7 +423,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="container mx-auto mt-5">
+    <div className="max-w-screen-xl mx-auto mt-5">
       <div className="grid md:grid-cols-4 grid-cols-1 pt-12 gap-4">
         <div className="col-span-3">
           <Carousel
@@ -410,16 +434,32 @@ const Home = () => {
           >
             <CarouselContent>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
-                <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
+                <img
+                  className="rounded-lg"
+                  src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
+                  alt=""
+                />
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
-                <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
+                <img
+                  className="rounded-lg"
+                  src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
+                  alt=""
+                />
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
-                <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
+                <img
+                  className="rounded-lg"
+                  src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
+                  alt=""
+                />
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
-                <img className="rounded-lg" src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg" alt="" />
+                <img
+                  className="rounded-lg"
+                  src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
+                  alt=""
+                />
               </CarouselItem>
             </CarouselContent>
             <CarouselPrevious />
@@ -427,15 +467,29 @@ const Home = () => {
           </Carousel>
           <div className="flex items-center justify-between mt-8">
             <p className="text-lg">Study Plan</p>
-            <Link className="text-blue-400 text-sm" to='/'>See all</Link>
+            <Link className="text-blue-400 text-sm" to="/">
+              See all
+            </Link>
           </div>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-3 mt-4">
             {studyPlan.map(({ id, img, path, title, description }) => (
-              <Link key={id} to={path} className="h-24 border hover:border-primary transition-all dark:bg-secondary flex gap-4 p-2 rounded-lg items-center">
-                <img width={72} height={72} className="rounded-md" src={img} alt="" />
+              <Link
+                key={id}
+                to={path}
+                className="h-24 border hover:border-primary transition-all dark:bg-secondary flex gap-4 p-2 rounded-lg items-center"
+              >
+                <img
+                  width={72}
+                  height={72}
+                  className="rounded-md"
+                  src={img}
+                  alt=""
+                />
                 <div className="flex flex-col ">
                   <p className="tracking-wide">{title}</p>
-                  <p className="text-gray-500 text-xs tracking-wide mt-1 line-clamp-1">{description}</p>
+                  <p className="text-gray-500 text-xs tracking-wide mt-1 line-clamp-1">
+                    {description}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -506,7 +560,7 @@ const Home = () => {
 
               <Input
                 placeholder="Filter emails..."
-                value={(table.getColumn("email")?.getFilterValue()) ?? ""}
+                value={table.getColumn("email")?.getFilterValue() ?? ""}
                 onChange={(event) =>
                   table.getColumn("email")?.setFilterValue(event.target.value)
                 }
@@ -517,7 +571,7 @@ const Home = () => {
                 <Settings className="w-5 h-5" />
               </Button>
 
-              <Button variant='secondary' className="">
+              <Button variant="secondary" className="">
                 <Shuffle className="w-5 h-5 mr-2" />
                 Pick One
               </Button>
@@ -534,11 +588,11 @@ const Home = () => {
                             {header.isPlaceholder
                               ? null
                               : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
                           </TableHead>
-                        )
+                        );
                       })}
                     </TableRow>
                   ))}
@@ -572,7 +626,6 @@ const Home = () => {
                   )}
                 </TableBody>
               </Table>
-
             </div>
             <DataTablePagination table={table} />
           </div>
@@ -630,7 +683,7 @@ const Home = () => {
                               Visitors
                             </tspan>
                           </text>
-                        )
+                        );
                       }
                     }}
                   />
@@ -640,22 +693,28 @@ const Home = () => {
             <div className="w-[30%] flex flex-col items-center gap-2 py-2">
               <div className="dark:bg-zinc-900 bg-zinc-100 rounded-lg w-full flex flex-col items-center justify-center h-[33.3%]">
                 <p className="text-sm text-green-600">Easy</p>
-                <p className="text-gray-400 text-xs font-semibold mt-1">31/444</p>
+                <p className="text-gray-400 text-xs font-semibold mt-1">
+                  31/444
+                </p>
               </div>
               <div className="dark:bg-zinc-900 bg-zinc-100 rounded-lg w-full flex flex-col items-center justify-center h-[33.3%]">
                 <p className="text-sm text-yellow-600">Middle</p>
-                <p className="text-gray-400 text-xs font-semibold mt-1">31/444</p>
+                <p className="text-gray-400 text-xs font-semibold mt-1">
+                  31/444
+                </p>
               </div>
               <div className="dark:bg-zinc-900 bg-zinc-100 rounded-lg w-full flex flex-col items-center justify-center h-[33.3%]">
                 <p className="text-sm text-red-600">Hard</p>
-                <p className="text-gray-400 text-xs font-semibold mt-1">31/444</p>
+                <p className="text-gray-400 text-xs font-semibold mt-1">
+                  31/444
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
