@@ -9,9 +9,7 @@ import {
   CreditCard,
   ExternalLink,
   Camera,
-  RotateCcwIcon,
   RotateCcw,
-  LucideRotateCcw,
   RotateCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,22 +18,14 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
 
 export default function ProfileSettings() {
   const [activeTab, setActiveTab] = useState("basic-info");
   const [open, setOpen] = useState(false);
-  const [scale, setScale] = useState(1); // Zoom darajasi
-  const [rotation, setRotation] = useState(0); // Rotation angle
+  const [scale, setScale] = useState(1);
+  const [rotation, setRotation] = useState(0);
 
   const profileData = {
     name: "Asadbek Nosirjonov",
@@ -88,7 +78,7 @@ export default function ProfileSettings() {
             max={2}
             min={0.2}
             step={0.1}
-            className="my-2"
+            className="my-2 cursor-pointer"
           />
           <label
             for="uploadFile1"
@@ -138,12 +128,10 @@ export default function ProfileSettings() {
           onClick={() => setOpen(true)}
           className="cursor-pointer relative mb-4 h-32 w-32 overflow-hidden rounded-lg border-4 border-white group"
         >
-          {/* Overlay on hover */}
           <div className="absolute flex justify-center items-center inset-0 bg-gray-800 opacity-0 group-hover:opacity-50 transition-opacity duration-300">
             <Camera />
           </div>
 
-          {/* Profile Image */}
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MMV8r0RvdI34Qs0089PJxWLm0Pxu27.png"
             alt="Profile picture"
