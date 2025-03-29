@@ -249,10 +249,10 @@ const Profile = () => {
           </div>
           <Tabs defaultValue="recent" className="w-full mt-4">
             <TabsList>
-              <TabsTrigger value="recent">Recent AC</TabsTrigger>
-              <TabsTrigger value="list">List</TabsTrigger>
-              <TabsTrigger value="solutions">Solutions</TabsTrigger>
-              <TabsTrigger value="discuss">Discuss</TabsTrigger>
+              <TabsTrigger className="w-[150px]" value="recent">Recent AC</TabsTrigger>
+              <TabsTrigger className="w-[150px]" value="list">List</TabsTrigger>
+              <TabsTrigger className="w-[150px]" value="solutions">Solutions</TabsTrigger>
+              <TabsTrigger className="w-[150px]" value="discuss">Discuss</TabsTrigger>
             </TabsList>
             <TabsContent value="recent">
               <div className="flex flex-col [&>a]:border-l [&>a]:border-r [&>*:first-child]:border-t [&>*:first-child]:rounded-t-lg [&>*:last-child]:border-b [&>*:last-child]:border-l [&>*:last-child]:border-r [&>*:last-child]:rounded-b-lg dark:[&>*:nth-child(odd)]:bg-zinc-800 [&>*:nth-child(odd)]:bg-zinc-100">

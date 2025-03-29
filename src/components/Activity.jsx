@@ -1861,6 +1861,6 @@ export default function App() {
 }
 
 const explicitTheme = {
-  light: ['#151B23', '#023A16', '#186C2E', '#2FA143', '#57D364'],
+  light: ['#f4f4f4', '#e3f6e1', '#a4d79d', '#62bc62', '#2c8d2f'],
   dark: ['#151B23', '#023A16', '#186C2E', '#2FA143', '#57D364'],
 }

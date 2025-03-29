@@ -52,6 +52,7 @@ import {
   RadialBarChart,
 } from "recharts";
 import { ChartContainer } from "@/components/ui/chart";
+import { uz } from 'date-fns/locale'; // O'zbek tilidagi lokal
 
 const columns2 = [
   {
@@ -613,6 +614,7 @@ const Home = () => {
         </div>
         <div className="col-span-1">
           <Calendar
+            locale={uz}
             mode="single"
             selected={date}
             onSelect={setDate}

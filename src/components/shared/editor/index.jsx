@@ -7,9 +7,9 @@ import { python } from "@codemirror/lang-python";
 import { java } from "@codemirror/lang-java";
 import { cpp } from "@codemirror/lang-cpp";
 import { oneDark } from "@codemirror/theme-one-dark";
-import { dracula } from "@uiw/codemirror-theme-dracula";
 import { basicLight } from "@uiw/codemirror-theme-basic";
-import { gruvboxDark, gruvboxLight } from "@uiw/codemirror-theme-gruvbox-dark";
+import { gruvboxDark } from "@uiw/codemirror-theme-gruvbox-dark";
+import { abcdef } from "@uiw/codemirror-theme-abcdef";
 import {
   Select,
   SelectTrigger,
@@ -48,11 +48,10 @@ const languages = {
 };
 
 const themes = {
+  abcdef: { name: "abcdef", mode: abcdef },
   dark: { name: "One Dark", mode: oneDark },
-  dracula: { name: "Dracula", mode: dracula },
   light: { name: "Light", mode: basicLight },
   gruvboxDark: { name: "Gruvbox dark", mode: gruvboxDark },
-  gruvbox: { name: "Gruvbox light", mode: gruvboxLight },
 };
 
 const executeCode = async (language, code) => {
@@ -86,8 +85,8 @@ const executeCode = async (language, code) => {
 
 export default function LeetCodeEditor() {
   const [language, setLanguage] = useState("javascript");
-  const [theme, setTheme] = useState("dark");
-  const [code, setCode] = useState("// Write your code here...");
+  const [theme, setTheme] = useState("abcdef");
+  const [code, setCode] = useState("function hello() {\n  return 'Hello, world!';\n} \n \nhello();");
   const [output, setOutput] = useState("");
 
   React.useEffect(() => {
@@ -106,6 +105,20 @@ export default function LeetCodeEditor() {
 
   const handleSubmit = () => {
     setOutput("✅ Your solution has been submitted!");
+  };
+
+  const handleLanguageChange = (language) => {
+    setLanguage(language);
+
+    if (language === "javascript") {
+      setCode("function hello() {\n  return 'Hello, world!';\n} \n \nhello();");
+    } else if (language === "python") {
+      setCode("def hello():\n    return 'Hello, world!'\n\nhello()");
+    } else if (language === "java") {
+      setCode("public class Main {\n    public static void main(String[] args) {\n        System.out.println('Hello, world!');\n    }\n}");
+    } else if (language === "cpp") {
+      setCode("#include <iostream>\n\nint main() {\n    std::cout << 'Hello, world!';\n    return 0;\n}");
+    }
   };
 
   return (
@@ -328,7 +341,7 @@ export default function LeetCodeEditor() {
 
           <div className="flex py-2 pl-2 flex-col sm:flex-row sm:justify-between sm:items-center">
             <div className="flex items-center gap-2">
-              <Select onValueChange={setLanguage} defaultValue={language}>
+              <Select onValueChange={handleLanguageChange} defaultValue={language}>
                 <SelectTrigger className="w-28 text-[12px] cursor-pointer !h-2 border-none">
                   <SelectValue placeholder="Select Language" />
                 </SelectTrigger>
