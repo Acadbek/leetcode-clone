@@ -1,3 +1,6 @@
+import React from "react";
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 import ActivityCalendar from "react-activity-calendar";
 
 export default function App() {
@@ -16,9 +19,9 @@ export default function App() {
             level: 0
           },
           {
-            count: 3,
+            count: 6,
             date: "2021-01-03",
-            level: 2
+            level: 3
           },
           {
             count: 1,
@@ -1826,11 +1829,12 @@ export default function App() {
             level: 0
           },
           {
-            count: 1,
+            count: 300,
             date: "2021-12-31",
             level: 1
           }
         ]}
+        theme={explicitTheme}
         labels={{
           legend: {
             less: "Kamroq",
@@ -1841,14 +1845,22 @@ export default function App() {
             'May', 'Iyun', 'Iyul', 'Avg',
             'Sen', 'Okt', 'Noy', 'Dek'
           ],
-          theme: {
-            light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-            dark: ["#1a1a1a", "#006d32", "#26a641", "#39d353", "#80f3a5"]
-          },
           totalCount: "{{count}} contributions in {{year}}",
           weekdays: ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan']
         }}
+        renderBlock={(block, activity) =>
+          React.cloneElement(block, {
+            'data-tooltip-id': 'react-tooltip',
+            'data-tooltip-html': `${activity.count} activities on ${activity.date}`,
+          })
+        }
       />
+      <Tooltip id="react-tooltip" />
     </div>
   );
+}
+
+const explicitTheme = {
+  light: ['#151B23', '#023A16', '#186C2E', '#2FA143', '#57D364'],
+  dark: ['#151B23', '#023A16', '#186C2E', '#2FA143', '#57D364'],
 }

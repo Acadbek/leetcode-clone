@@ -37,11 +37,6 @@ const Navbar = () => {
                 Login
               </Button>
             </Link>
-            <Link to="/register">
-              <Button className="h-8" variant="secondary">
-                Register
-              </Button>
-            </Link>
           </div>
           <ModeToggle />
         </div>

@@ -53,7 +53,7 @@ const rencent = [
 const Profile = () => {
   return (
     <div className="max-w-screen-xl mx-auto">
-      <div className="grid grid-cols-12 mt-6 gap-4">
+      <div className="grid md:grid-cols-12 mt-6 gap-4">
         <div className="col-span-3">
           <div className="border p-3 rounded-lg">
             <div className="flex items-center gap-3">
@@ -244,7 +244,7 @@ const Profile = () => {
             </div>
             <div className="w-full border">2</div>
           </div>
-          <div className="mt-4 bg-secondary border flex justify-center items-center p-3 rounded-lg">
+          <div className="mt-4 border flex justify-center items-center p-3 rounded-lg">
             <ActivityStats />
           </div>
           <Tabs defaultValue="recent" className="w-full mt-4">

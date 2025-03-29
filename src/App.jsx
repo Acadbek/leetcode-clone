@@ -11,6 +11,8 @@ import RootLayout from "./_root/RootLayout";
 import LeetCodeEditor from "./components/shared/editor";
 import Profile from "./_root/pages/profile/Profile";
 import ProfileSettings from "./_root/pages/profile/Settings";
+import AuthLayout from "./_auth/AuthLayout";
+import LoginPage from "./_auth/forms/Login";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,6 +29,10 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/editor/:id" element={<LeetCodeEditor />} />
           <Route path="/profile/settings" element={<ProfileSettings />} />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
         </Route>
 
         <Route path="*" element={<h1>404</h1>} />

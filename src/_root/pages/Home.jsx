@@ -198,10 +198,10 @@ const columns = [
         difficulty === "Easy"
           ? "text-green-400"
           : difficulty === "Medium"
-          ? "text-yellow-400"
-          : difficulty === "Hard"
-          ? "text-red-400"
-          : "text-gray-100";
+            ? "text-yellow-400"
+            : difficulty === "Hard"
+              ? "text-red-400"
+              : "text-gray-100";
 
       return <span className={color}>{difficulty}</span>;
     },
@@ -422,8 +422,16 @@ const Home = () => {
     { name: "Depth-First Search", count: 314 },
   ];
 
+  const filters = [
+    { placeholder: "Lists", options: [{ value: "all", label: "All" }, { value: "favorites", label: "Favorites" }] },
+    { placeholder: "Difficulty", options: [{ value: "easy", label: "Easy" }, { value: "medium", label: "Medium" }, { value: "hard", label: "Hard" }] },
+    { placeholder: "Status", options: [{ value: "solved", label: "Solved" }, { value: "unsolved", label: "Unsolved" }] },
+    { placeholder: "Tags", options: [{ value: "arrays", label: "Arrays" }, { value: "strings", label: "Strings" }] }
+  ];
+
+
   return (
-    <div className="max-w-screen-xl mx-auto mt-5">
+    <div className="px-4 sm:p-0 max-w-screen-xl mx-auto mt-5">
       <div className="grid md:grid-cols-4 grid-cols-1 pt-12 gap-4">
         <div className="col-span-3">
           <Carousel
@@ -435,28 +443,28 @@ const Home = () => {
             <CarouselContent>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img
-                  className="rounded-lg"
+                  className="rounded-lg w-full"
                   src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
                   alt=""
                 />
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img
-                  className="rounded-lg"
+                  className="rounded-lg w-full"
                   src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
                   alt=""
                 />
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img
-                  className="rounded-lg"
+                  className="rounded-lg w-full"
                   src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
                   alt=""
                 />
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 select-none">
                 <img
-                  className="rounded-lg"
+                  className="rounded-lg w-full"
                   src="https://assets.leetcode.com/users/images/49479bba-73b3-45d2-9272-99e773d784b2_1687290663.3168745.jpeg"
                   alt=""
                 />
@@ -517,65 +525,38 @@ const Home = () => {
           </div>
           <div className="w-full mt-6">
             <div className="flex items-center justify-between gap-2">
-              <Select>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Lists" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All</SelectItem>
-                  <SelectItem value="favorites">Favorites</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="easy">Easy</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="hard">Hard</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="solved">Solved</SelectItem>
-                  <SelectItem value="unsolved">Unsolved</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Tags" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="arrays">Arrays</SelectItem>
-                  <SelectItem value="strings">Strings</SelectItem>
-                </SelectContent>
-              </Select>
+              {filters.map(({ placeholder, options }) => (
+                <Select key={placeholder}>
+                  <SelectTrigger className="w-[120px]" aria-label={placeholder}>
+                    <SelectValue placeholder={placeholder} />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60 overflow-auto">
+                    {options.map(({ value, label }) => (
+                      <SelectItem key={value} value={value}>{label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ))}
 
               <Input
-                placeholder="Filter emails..."
+                placeholder="Search..."
                 value={table.getColumn("email")?.getFilterValue() ?? ""}
                 onChange={(event) =>
                   table.getColumn("email")?.setFilterValue(event.target.value)
                 }
-                className="max-w-sm"
+                className="w-full sm:max-w-sm"
               />
 
-              <Button variant="outline">
+              <Button variant="outline" aria-label="Settings">
                 <Settings className="w-5 h-5" />
               </Button>
 
-              <Button variant="secondary" className="">
+              <Button variant="secondary">
                 <Shuffle className="w-5 h-5 mr-2" />
                 Pick One
               </Button>
             </div>
+
 
             <div className="rounded-lg border mt-2">
               <Table>
@@ -588,9 +569,9 @@ const Home = () => {
                             {header.isPlaceholder
                               ? null
                               : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
                           </TableHead>
                         );
                       })}
