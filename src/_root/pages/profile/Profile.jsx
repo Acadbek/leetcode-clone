@@ -61,7 +61,7 @@ const Profile = () => {
                 width={80}
                 height={80}
                 className="rounded-lg object-cover"
-                src="https://assets.leetcode.com/users/avatars/avatar_1646426627.png"
+                src="https://avatars.githubusercontent.com/u/87940040?v=4"
                 alt=""
               />
               <div>
@@ -264,19 +264,19 @@ const Profile = () => {
               </div>
             </TabsContent>
             <TabsContent value="list">
-              <div className="flex justify-center items-center flex flex-col items-center gap-3">
+              <div className="flex justify-center flex-col items-center gap-3">
                 <img width={200} src={nullImgLight} alt="d" />
                 <p className="text-muted-foreground text-sm">No public list</p>
               </div>
             </TabsContent>
             <TabsContent value="solutions">
-              <div className="flex justify-center items-center flex flex-col items-center gap-3">
+              <div className="flex justify-center flex-col items-center gap-3">
                 <img width={200} src={nullImgLight} alt="" />
                 <p className="text-muted-foreground text-sm">No solutions</p>
               </div>
             </TabsContent>
             <TabsContent value="discuss">
-              <div className="flex justify-center items-center flex flex-col items-center gap-3">
+              <div className="flex justify-center flex-col items-center gap-3">
                 <img width={200} src={nullImgLight} alt="" />
                 <p className="text-muted-foreground text-sm">No discussions</p>
               </div>

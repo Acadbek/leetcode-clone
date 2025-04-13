@@ -47,7 +47,7 @@ export default function ProfileSettings() {
           <div className="flex items-center justify-center rounded-lg">
             <div className="w-[200px] h-[200px] overflow-hidden rounded-lg border-2">
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MMV8r0RvdI34Qs0089PJxWLm0Pxu27.png"
+                src="https://avatars.githubusercontent.com/u/87940040?v=4"
                 alt="Profile picture"
                 className="object-cover w-[200px] h-[200px] z-10 rounded-lg"
                 style={{
@@ -133,7 +133,7 @@ export default function ProfileSettings() {
           </div>
 
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MMV8r0RvdI34Qs0089PJxWLm0Pxu27.png"
+            src="https://avatars.githubusercontent.com/u/87940040?v=4"
             alt="Profile picture"
             className="object-cover w-full h-full z-10"
           />
@@ -202,50 +202,50 @@ export default function ProfileSettings() {
                 <ProfileField
                   label="Name"
                   value={profileData.name}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                 />
                 <ProfileField
                   label="Gender"
                   value={profileData.gender}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                 />
                 <ProfileField
                   label="Location"
                   value={profileData.location}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                 />
                 <ProfileField
                   label="Birthday"
                   value={profileData.birthday}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                 />
                 <ProfileField
                   label="Summary"
                   value={profileData.summary}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                   isTextarea
                 />
                 <ProfileField
                   label="Website"
                   value={profileData.website}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                   isLink
                 />
                 <ProfileField
                   label="Github"
                   value={profileData.github}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                   isLink
                 />
                 <ProfileField
                   label="LinkedIn"
                   value={profileData.linkedin}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                 />
                 <ProfileField
                   label="X (formerly Twitter)"
                   value={profileData.twitter}
-                  onEdit={() => {}}
+                  onEdit={() => { }}
                 />
               </div>
             </Card>

@@ -430,7 +430,6 @@ const Home = () => {
     { placeholder: "Tags", options: [{ value: "arrays", label: "Arrays" }, { value: "strings", label: "Strings" }] }
   ];
 
-
   return (
     <div className="px-4 sm:p-0 max-w-screen-xl mx-auto mt-5">
       <div className="grid md:grid-cols-4 grid-cols-1 pt-12 gap-4">
@@ -476,9 +475,6 @@ const Home = () => {
           </Carousel>
           <div className="flex items-center justify-between mt-8">
             <p className="text-lg">Study Plan</p>
-            <Link className="text-blue-400 text-sm" to="/">
-              See all
-            </Link>
           </div>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-3 mt-4">
             {studyPlan.map(({ id, img, path, title, description }) => (
@@ -583,6 +579,7 @@ const Home = () => {
                   {table.getRowModel().rows?.length ? (
                     table.getRowModel().rows.map((row) => (
                       <TableRow
+                        className='dark:[&:nth-child(odd)]:bg-zinc-900 hover:bg-transparent [&:nth-child(odd)]:bg-zinc-100'
                         key={row.id}
                         data-state={row.getIsSelected() && "selected"}
                       >
